@@ -1,0 +1,3 @@
+Rotor 1 : Q
+Rotor 2 : E
+Rotor 3 : V
