@@ -1,6 +1,7 @@
 A faire :
 
 - Ameliorer UI
+- Ui : Possibilité de choisir la configuration de base
 
 **********PLANNING***********
 

@@ -58,11 +58,6 @@ public class EN_Rotor : EN_Encodeur
         int _notcheCorrespondance = currentRotation == 0 ? 25 : currentRotation - 1;
         return EN_DataManager.Instance.Data.Alphabet[_notcheCorrespondance] == notche;
     }
-    public void UpdateRotorAngle()
-    {
-        float angle = 360 / 26f * currentRotation;
-        transform.eulerAngles = new Vector3(0, 0, -angle);
-    }
     public void UpdateRotorRotation(float _angle)
     {
         Quaternion _direction = Quaternion.Euler(0, 0, 360 - _angle);
@@ -79,7 +74,6 @@ public class EN_Rotor : EN_Encodeur
         int _index = EN_DataManager.Instance.Data.Alphabet.IndexOf(_char) - currentRotation;
         return _index < 0 ? _index + 26 : _index;
     }
-
     public override int Encode(int _index)
     {
         if (!IsValid) return _index;
@@ -89,7 +83,6 @@ public class EN_Rotor : EN_Encodeur
         //Debug.Log($"{name} encodage : index {_index} => {_toDecode} devient {_codedChar} => {GetIndexForChar(_codedChar)}");
         return GetIndexForChar(_codedChar);
     }
-
     char CodedLetterInReverse(char _toDecode)
     {
         foreach (KeyValuePair<char, char> _charAssociation in correspondance)
@@ -97,7 +90,6 @@ public class EN_Rotor : EN_Encodeur
                 return _charAssociation.Key;
         return ' ';
     }
-
     public void Reset()
     {
         InitRotor();

@@ -27,7 +27,7 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
             RotateRotors();
             EN_SoundsManager.Instance?.PlaySound(rotorRotationFeedbackSound);
         };
-        OnLetterEncoded += (c) => EN_LightsManager.Instance?.SetLightPosition(c);
+        OnLetterEncoded += (c) => EN_LightsManagerTemp.Instance?.SetLightPosition(c);
     }
     void Start()
     {
@@ -78,7 +78,7 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
     {
         for (int i = 0; i < rotors.Count; i++)
             rotors[i].Reset();
-        EN_LightsManager.Instance?.ResetLight();
+        EN_LightsManagerTemp.Instance?.ResetLight();
     }
     #endregion
 }
