@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(EN_LightsManagerTemp))]
-public class EN_LightsManagerEditor : EN_MyEditor<EN_LightsManagerTemp>
+[CustomEditor(typeof(EN_LightsManager))]
+public class EN_LightsManagerEditor : EN_MyEditor<EN_LightsManager>
 {
+    #region Unity Methods 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        //base.OnInspectorGUI();
         DrawLightProperty();
         DrawPositionsList();
         DrawAddButton();
         serializedObject.ApplyModifiedProperties();
     }
-
     private void OnSceneGUI()
     {
         serializedObject.Update();
@@ -23,14 +20,21 @@ public class EN_LightsManagerEditor : EN_MyEditor<EN_LightsManagerTemp>
         DrawDebug();
         serializedObject.ApplyModifiedProperties();
     }
+    #endregion
 
+    #region Inspecteur
+    /// <summary>
+    /// Draw a property field for the manager's light
+    /// </summary>
     void DrawLightProperty()
     {
         SerializedProperty _lightProp = serializedObject.FindProperty("lightFeedback");
         EditorGUILayout.PropertyField(_lightProp);
         Space(3);
     }
-
+    /// <summary>
+    /// Draw the fields and the button to add a position at the list
+    /// </summary>
     void DrawAddButton()
     {
         SerializedProperty _cursorPosProp = serializedObject.FindProperty("currentCursorPosition");
@@ -41,7 +45,9 @@ public class EN_LightsManagerEditor : EN_MyEditor<EN_LightsManagerTemp>
         if (GUILayout.Button("Add Light Position"))
             eTarget.Add(_characterIDProp.stringValue.ToUpper(), _cursorPosProp.vector3Value);
     }
-
+    /// <summary>
+    /// Draw all the register position in the inspecteur with a button to delete it
+    /// </summary>
     void DrawPositionsList()
     {
         SerializedProperty _idList = serializedObject.FindProperty("idList");
@@ -60,12 +66,20 @@ public class EN_LightsManagerEditor : EN_MyEditor<EN_LightsManagerTemp>
 
         Space(3);
     }
+    #endregion
 
+    #region Scene
+    /// <summary>
+    /// Draw an handle position to place the position wich will be register
+    /// </summary>
     void DrawHandlePosition()
     {
         SerializedProperty _positionProp = serializedObject.FindProperty("currentCursorPosition");
         _positionProp.vector3Value = Handles.PositionHandle(_positionProp.vector3Value, Quaternion.identity);
     }
+    /// <summary>
+    /// Draw a yellow disc on the scene on each position registered in the list
+    /// </summary>
     void DrawDebug()
     {
         SerializedProperty _positionList = serializedObject.FindProperty("positionList");
@@ -73,10 +87,13 @@ public class EN_LightsManagerEditor : EN_MyEditor<EN_LightsManagerTemp>
         for (int i = 0; i < _positionList.arraySize; i++)
             Handles.DrawSolidDisc(_positionList.GetArrayElementAtIndex(i).vector3Value, Vector3.up, .2f);
     }
+    #endregion
 
+    #region Utils
     void Space(int _i = 1)
     {
         for (int i = 0; i < _i; i++)
             EditorGUILayout.Space();
     }
+    #endregion
 }

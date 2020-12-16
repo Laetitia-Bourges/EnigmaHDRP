@@ -6,29 +6,29 @@ A faire :
 **********PLANNING***********
 
 LUNDI : 
-- Reflexion, comprehension des consignes OK
-- Configuration Projet OK
-- UI OK
+- Reflexion, comprehension des consignes OK (*)
+- Configuration Projet OK (*)
+- UI OK (*)
 
-- Encodage / Decodage OK
-- Rotation Rotors avec Notche OK
+- Encodage / Decodage OK (*)
+- Rotation Rotors avec Notche OK (*)
 
 MARDI :
 - Rotation des rotors dur l'interface OK
-- Sons OK
-- Lumières OK
+- Sons OK (*)
+- Lumières OK (*)
 
 - Timeline ouverture OK
-- Data JSON OK
+- Data JSON OK (*)
 
 MERCREDI :
-- Rendu HDRP OK
-- Reesaie Tool Lights
+- Rendu HDRP OK (*)
+- Reesaie Tool Lights OK
 
 - Bouton pour copier le message codé OK
 - Faire tourner les rotors en lerp OK
 - Possibilite de changer la disposition de base OK
-- Rotation en notche + 1 OK
+- Rotation en notche + 1 OK (*)
 
 JEUDI :
 - Changer la disposition de base
