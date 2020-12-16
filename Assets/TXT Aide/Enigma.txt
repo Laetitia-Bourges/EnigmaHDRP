@@ -2,6 +2,7 @@ A faire :
 
 - Ameliorer UI
 - Ui : Possibilité de choisir la configuration de base
+- Si le temps : faire descendre les touches sur lesquelles on appuie
 
 **********PLANNING***********
 
