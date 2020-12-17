@@ -5,8 +5,8 @@ using UnityEngine;
 public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
 {
     #region Event
-    public event Action OnRotateRotors = null;
-    public event Action<char> OnLetterEncoded = null;
+    public event Action<char> OnIsALetterEnter = null;
+    public event Action<char> OnLetterIsEncoded = null;
     #endregion
 
     #region F/P
@@ -15,6 +15,7 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
     [SerializeField] AudioClip rotorRotationFeedbackSound = null;
 
     public bool IsValid => reflecteur && rotors.Count > 0 && rotorRotationFeedbackSound;
+    public List<EN_Rotor> Rotors => rotors;
     #endregion
 
     #region Unity Methods
@@ -22,12 +23,13 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
     {
         base.Awake();
         if (!IsValid) return;
-        OnRotateRotors += () =>
+        OnIsALetterEnter += (c) =>
         {
             RotateRotors();
             EN_SoundsManager.Instance?.PlaySound(rotorRotationFeedbackSound);
+            EN_KeyboardAction.Instance?.UpdateKeyBoard(c);
         };
-        OnLetterEncoded += (c) => EN_LightsManager.Instance?.SetLightPosition(c);
+        OnLetterIsEncoded += (c) => EN_LightsManager.Instance?.SetLightPosition(c);
     }
     void Start()
     {
@@ -38,19 +40,24 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
     }
     void OnDestroy()
     {
-        OnLetterEncoded = null;
-        OnRotateRotors = null;
+        OnLetterIsEncoded = null;
+        OnIsALetterEnter = null;
     }
     #endregion
 
     #region Custom Methods
+    /// <summary>
+    /// Encode a letter and return her correspondance
+    /// </summary>
+    /// <param name="_letter">char to encode</param>
+    /// <returns>the encoded letter</returns>
     public char Encode(char _letter)
     {
         if (!IsValid) return ' ';
-        OnRotateRotors?.Invoke();
         _letter = _letter.ToString().ToUpper()[0];
+        OnIsALetterEnter?.Invoke(_letter);
         char _codedLetter = EncodeLetter(_letter);
-        OnLetterEncoded?.Invoke(_codedLetter);
+        OnLetterIsEncoded?.Invoke(_codedLetter);
         return _codedLetter;
     }
     char EncodeLetter(char _letter)
@@ -77,8 +84,14 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
     public void ResetEnigma()
     {
         for (int i = 0; i < rotors.Count; i++)
-            rotors[i].Reset();
-        EN_LightsManager.Instance?.ResetLight();
+            rotors[i].ResetRotor();
+    }
+
+    public void ChangeRotorConfiguration(char _rotor1Config, char _rotor2Config, char _rotor3Config)
+    {
+        rotors[0].SetConfig(_rotor1Config);
+        rotors[1].SetConfig(_rotor2Config);
+        rotors[2].SetConfig(_rotor3Config);
     }
     #endregion
 }
