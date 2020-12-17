@@ -78,7 +78,7 @@ public class EN_Rotor : EN_Encodeur
     public void UpdateRotorRotation(float _angle)
     {
         Quaternion _direction = Quaternion.Euler(0, 0, 360 - _angle);
-        transform.rotation = Quaternion.Lerp(transform.rotation, _direction, Time.deltaTime * 20);
+        transform.rotation = Quaternion.Lerp(transform.rotation, _direction, Time.deltaTime * 10);
     }
     #endregion
     #region Encode Letter
