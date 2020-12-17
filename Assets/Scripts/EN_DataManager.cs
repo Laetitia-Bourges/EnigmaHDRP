@@ -24,12 +24,3 @@ public struct JsonData
     public List<string> RotorsData;
     public List<string> ReflecteurData;
 }
-
-/*
-public JsonData(string _string)
-{
-    Alphabet = new List<char>() { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-    RotorsData = new List<string>() { "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "AJDKSIRUXBLHWTMCQGZNPYFVOE", "BDFHJLCPRTXVZNYEIWGAKMUSQO" };
-    ReflecteurData = new List<string>() { "ABCDEFGIJKMTV", "YRUHQSLPXNOZW" };
-}
-*/

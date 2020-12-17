@@ -60,6 +60,11 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
         OnLetterIsEncoded?.Invoke(_codedLetter);
         return _codedLetter;
     }
+    /// <summary>
+    /// Encode a letter and return her correspondance
+    /// </summary>
+    /// <param name="_letter">char to encode</param>
+    /// <returns>the encoded letter</returns>
     char EncodeLetter(char _letter)
     {
         int _codeIndex = EN_DataManager.Instance.Data.Alphabet.IndexOf(_letter);
@@ -73,6 +78,9 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
 
         return EN_DataManager.Instance.Data.Alphabet[_codeIndex];
     }
+    /// <summary>
+    /// Rotate all the rotors of the machine
+    /// </summary>
     public void RotateRotors()
     {
         for (int i = 0; i < rotors.Count; i++)
@@ -81,12 +89,20 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
             if (!_rotateNext) return;
         }
     }
+    /// <summary>
+    /// Reset the rotors of Enigma
+    /// </summary>
     public void ResetEnigma()
     {
         for (int i = 0; i < rotors.Count; i++)
             rotors[i].ResetRotor();
     }
-
+    /// <summary>
+    /// Set the start configuration of the rotors
+    /// </summary>
+    /// <param name="_rotor1Config">new configuration for the rotor 1</param>
+    /// <param name="_rotor2Config">new configuration for the rotor 2</param>
+    /// <param name="_rotor3Config">new configuration for the rotor 3</param>
     public void ChangeRotorConfiguration(char _rotor1Config, char _rotor2Config, char _rotor3Config)
     {
         rotors[0].SetConfig(_rotor1Config);

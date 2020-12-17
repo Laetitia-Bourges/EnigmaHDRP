@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public interface IHandle<TID, TItem> where TItem : IHandleItem<TID>
 {
