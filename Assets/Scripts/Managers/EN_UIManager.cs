@@ -12,11 +12,11 @@ public class EN_UIManager : EN_Singleton<EN_UIManager>
     [SerializeField] Button resetButton = null, quitButton = null, copyButton = null, applyButton = null;
     [SerializeField] TMP_InputField msgToEncodeField = null;
     [SerializeField] TMP_Text encodedMsgTextArea = null, msgToEncodedTextArea = null;
-    [SerializeField] TMP_Text rotor1Config = null, rotor2Config = null, rotor3Config = null;
+    [SerializeField] List<TMP_Text> rotorsConfig = null;
     [SerializeField] AudioClip feedbackInputSound = null;
 
     public bool IsUIValid => resetButton && quitButton && copyButton && applyButton && msgToEncodeField && 
-        encodedMsgTextArea && msgToEncodedTextArea && rotor1Config && rotor2Config && rotor3Config;
+        encodedMsgTextArea && msgToEncodedTextArea && rotorsConfig.Count > 0;
     public bool IsSoundValid => feedbackInputSound;
     #endregion
 
@@ -60,10 +60,9 @@ public class EN_UIManager : EN_Singleton<EN_UIManager>
     void InitRotorConfigText()
     {
         if (!IsUIValid) return;
-        List<EN_Rotor> rotors = EN_Enigma.Instance.Rotors;
-        rotor1Config.text += rotors[0].StartConfig.ToString();
-        rotor2Config.text += rotors[1].StartConfig.ToString();
-        rotor3Config.text += rotors[2].StartConfig.ToString();
+        List<EN_Rotor> _rotors = EN_Enigma.Instance.Rotors;
+        for (int i = 0; i < rotorsConfig.Count; i++)
+            rotorsConfig[i].text = _rotors[i].StartConfig.ToString();
     }
     #endregion
     #region Button fonctions
@@ -92,7 +91,10 @@ public class EN_UIManager : EN_Singleton<EN_UIManager>
     /// </summary>
     void ChangeConfiguration()
     {
-        EN_Enigma.Instance?.ChangeRotorConfiguration(rotor1Config.text.ToUpper()[0], rotor2Config.text.ToUpper()[0], rotor3Config.text.ToUpper()[0]);
+        List<char> _newConfig = new List<char>();
+        for (int i = 0; i < rotorsConfig.Count; i++)
+            _newConfig.Add(rotorsConfig[i].text.ToUpper()[0]);
+        EN_Enigma.Instance?.ChangeRotorConfiguration(_newConfig);
         ResetEnigma();
     }
     #endregion

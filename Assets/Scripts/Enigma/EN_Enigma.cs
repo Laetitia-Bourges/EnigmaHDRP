@@ -104,11 +104,10 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
     /// <param name="_rotor1Config">new configuration for the rotor 1</param>
     /// <param name="_rotor2Config">new configuration for the rotor 2</param>
     /// <param name="_rotor3Config">new configuration for the rotor 3</param>
-    public void ChangeRotorConfiguration(char _rotor1Config, char _rotor2Config, char _rotor3Config)
+    public void ChangeRotorConfiguration(List<char> _newConfig)
     {
-        rotors[0].SetConfig(_rotor1Config);
-        rotors[1].SetConfig(_rotor2Config);
-        rotors[2].SetConfig(_rotor3Config);
+        for (int i = 0; i < _newConfig.Count; i++)
+            rotors[i].SetConfig(_newConfig[i]);
     }
     #endregion
 }
