@@ -96,6 +96,7 @@ public class EN_Enigma : EN_Singleton<EN_Enigma>, IEncode<char>
     {
         for (int i = 0; i < rotors.Count; i++)
             rotors[i].ResetRotor();
+        EN_SoundsManager.Instance?.PlaySound(rotorRotationFeedbackSound);
     }
     /// <summary>
     /// Set the start configuration of the rotors

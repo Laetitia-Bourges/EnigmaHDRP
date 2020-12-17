@@ -1,9 +1,3 @@
-A faire :
-
-- Ameliorer UI
-- Ui : Possibilité de choisir la configuration de base
-- Si le temps : faire descendre les touches sur lesquelles on appuie
-
 **********PLANNING***********
 
 LUNDI : 
@@ -29,12 +23,17 @@ MERCREDI :
 - Bouton pour copier le message codé OK
 - Faire tourner les rotors en lerp OK
 - Possibilite de changer la disposition de base OK
-- Rotation en notche + 1 OK (*)
+- Rotation en notche + 1 OK 
 
 JEUDI :
-- Changer la disposition de base
+- Amelioration de l'UI OK
+- Les touches qui s'enfoncent OK
+- Summaries OK
 
 VENDREDI :
 - Polish
 
+
+- erreur quand on modifie les lettres la premiere fois
+- son des rotors quand on apply la config et au reset
 

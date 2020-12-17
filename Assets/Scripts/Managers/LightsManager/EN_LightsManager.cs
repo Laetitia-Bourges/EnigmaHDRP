@@ -16,6 +16,7 @@ public class EN_LightsManager : EN_Singleton<EN_LightsManager>
 
     public Dictionary<char, Vector3> Handles => handles;
     public bool IsValid => lightFeedback;
+    public string CharacterID => characterID; // juste pour enlever le warning qui dit que characterID n'est pas utilise (alors qu'il est utlisé dans l'editeur)
     #endregion
 
     #region UnityMethods
